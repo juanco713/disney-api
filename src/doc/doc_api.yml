@@ -1,0 +1,338 @@
+openapi: '3.0.1'
+info:
+  title: Disney API
+  version: '1.0'
+servers:
+  - url: http://localhost:3000/  
+
+tags:
+  - name: Register
+  - name: Characters
+  - name: Movies
+  - name: Genres
+
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - "Register" 
+      summary: User Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+
+  /auth/register:
+    post:
+      tags:
+        - "Register" 
+      summary: User sign up
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+  /characters:
+    get:
+      tags:
+        - "Characters" 
+      summary: Get all the characters!
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized   
+          
+  /characters/:id:
+    get:
+      tags:
+        - "Characters" 
+      summary: Get one character
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+
+  /character:
+    post:
+      tags:
+        - "Characters"
+      summary: Create a new character
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age: 
+                  type: string
+                weigth:
+                  type: string
+                history: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+  /character/:id:
+    delete:
+      tags:
+        - "Characters" 
+      summary: Delete one character
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+    put:
+      tags:
+        - "Characters" 
+      summary: Update one character
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age: 
+                  type: string
+                weigth:
+                  type: string
+                history: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+  /genre:
+    get:
+      tags:
+        - "Genres" 
+      summary: Get all the Genres!
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized 
+
+    post:
+      tags:
+        - "Genres"
+      summary: Create a new genre
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                img:
+                  type: string
+                name: 
+                  type: string
+                idmovies:
+                  type: string
+                history: 
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+  /genre/:id:
+    delete:
+      tags:
+        - "Genres" 
+      summary: Delete one Genre
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+    put:
+      tags:
+        - "Genres" 
+      summary: Update one Genre
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                img:
+                  type: string
+                name: 
+                  type: string
+                idmovies:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+  /movies:
+    get:
+      tags:
+        - "Movies" 
+      summary: Get all the Movies!
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized  
+           
+    post:
+      tags:
+        - "Movies"
+      summary: Create a new Movie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                year: 
+                  type: string
+                calification:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          
+  /movies/:id:
+    get:
+      tags:
+        - "Movies" 
+      summary: Get one movie
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+
+    delete:
+      tags:
+        - "Movies" 
+      summary: Delete one Movie
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+  
+    put:
+      tags:
+        - "Movies" 
+      summary: Update one movie
+      parameters:
+          - name: id
+            in: header
+            required: true
+            schema:
+             type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                year: 
+                  type: string
+                calification:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized        
