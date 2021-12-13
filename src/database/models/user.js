@@ -2,8 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 const connection = require('../index')
 
 
-function createRegisterModel(connection) {
-    const Register = connection.define('Register', {
+function createUserModel(connection) {
+    const User = connection.define('User', {
         email: {
             type: DataTypes.STRING,
             allowNull: false
@@ -11,11 +11,15 @@ function createRegisterModel(connection) {
         password: {
             type: DataTypes.STRING,
             allowNull:false
+        },
+        admin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
-    return Register;
+    return User;
 };
 
 module.exports = { 
-    createRegisterModel
+    createUserModel
 };

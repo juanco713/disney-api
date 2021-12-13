@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const { createCharacterModel } = require('./models/character');
 const { createMovieModel } = require('./models/movies');
 const { createGenreModel } = require('./models/genre');
-const { createRegisterModel } = require('./models/register')
+const { createUserModel } = require('./models/User')
 
 const models = {}; 
 
@@ -18,7 +18,7 @@ async function connectDB(host, username, password, database) {
     models.Character = createCharacterModel(connection);
     models.Movie = createMovieModel(connection);
     models.Genre = createGenreModel(connection);
-    models.Register = createRegisterModel(connection);
+    models.User = createUserModel(connection);
 
     models.Genre.hasMany(models.Movie);
     models.Movie.belongsTo(models.Genre);

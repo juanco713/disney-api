@@ -2,12 +2,13 @@ const { getModel } = require('../database/index');
 const jwt = require('jsonwebtoken');
 
 async function userRegister(req, res) {
-    const Register = getModel('Register');
+    const User = getModel('User');
     const { email, password } = req.body;
-    if (email, password) {
-        const newUser = await Register.build({
+    if (email && password || admin) {
+        const newUser = await User.build({
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            admin: req.body.admin
         });
         await newUser.save();
 
@@ -22,9 +23,9 @@ async function userRegister(req, res) {
 };
 
 async function userLogin(req, res) {
-    const Register = getModel('Register');
+    const User = getModel('User');
     const { email, password } = req.body;
-    const userFound = await Register.findOne({
+    const userFound = await User.findOne({
         where: {
             email: req.body.email,
             password: req.body.password

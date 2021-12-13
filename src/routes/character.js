@@ -1,5 +1,6 @@
 const Router = require('express');
 const router = Router();
+const {verifyToken, authAdmin} = require('../middlewares/authJwt')
 const {
     createCharacter,
     deleteCharacter,
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
     res.json('Disney Api')
 });
 
-router.get('/characters', getCharacters);
+router.get('/characters', verifyToken,authAdmin, getCharacters);
 
 router.get('/characters/:id', getOneCharacter);
 
