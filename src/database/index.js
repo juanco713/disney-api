@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 const { createCharacterModel } = require('./models/character');
 const { createMovieModel } = require('./models/movies');
 const { createGenreModel } = require('./models/genre');
-const { createUserModel } = require('./models/User')
+const { createUserModel } = require('./models/User');
+const { createRoleModel } = require('./models/rol')
 
 const models = {}; 
 
@@ -19,6 +20,8 @@ async function connectDB(host, username, password, database) {
     models.Movie = createMovieModel(connection);
     models.Genre = createGenreModel(connection);
     models.User = createUserModel(connection);
+    models.Role = createRoleModel(connection);
+
 
     models.Genre.hasMany(models.Movie);
     models.Movie.belongsTo(models.Genre);
@@ -26,9 +29,12 @@ async function connectDB(host, username, password, database) {
     models.Character.belongsToMany(models.Movie, { through: 'CharacterMovies' });
     models.Movie.belongsToMany(models.Character, { through: 'CharacterMovies' });
 
+    models.Role.hasOne(models.User);
+    models.User.belongsTo(models.Role);
+
     try {
         await connection.authenticate();
-        await connection.sync();
+        await connection.sync({force:true});
         console.log('Connection has been established successfully.');
 
     } catch (error) {

@@ -11,10 +11,6 @@ function createUserModel(connection) {
         password: {
             type: DataTypes.STRING,
             allowNull:false
-        },
-        admin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
         }
     });
     return User;

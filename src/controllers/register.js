@@ -4,11 +4,10 @@ const jwt = require('jsonwebtoken');
 async function userRegister(req, res) {
     const User = getModel('User');
     const { email, password } = req.body;
-    if (email && password || admin) {
+    if (email && password && !roleid) {
         const newUser = await User.build({
             email: req.body.email,
-            password: req.body.password,
-            admin: req.body.admin
+            password: req.body.password
         });
         await newUser.save();
 

@@ -31,7 +31,7 @@ async function authAdmin(req, res, next) {
     if (admin.admin === true) {
         next();
     } else {
-        return res.status(403).json('Not allowed');
+        return res.status(401).json('Not allowed');
     }
 };
 
