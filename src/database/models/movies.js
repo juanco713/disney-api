@@ -24,6 +24,8 @@ function createMovieModel(connection) {
             type: DataTypes.INTEGER,
             allowNull: true
         }
+    }, {
+        timestamps:false
     });
     return Movie;
 };

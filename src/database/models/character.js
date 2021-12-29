@@ -29,6 +29,8 @@ function createCharacterModel(connection) {
             allowNull: true
         }
         
+    }, {
+        timestamps: false
     });
     return Character;
 };

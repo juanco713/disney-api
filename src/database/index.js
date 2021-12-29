@@ -31,10 +31,9 @@ async function connectDB(host, username, password, database) {
 
     models.Role.hasOne(models.User);
     models.User.belongsTo(models.Role);
-
     try {
         await connection.authenticate();
-        await connection.sync({force:true});
+        await connection.sync();
         console.log('Connection has been established successfully.');
 
     } catch (error) {

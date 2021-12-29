@@ -16,6 +16,8 @@ function createGenreModel(connection) {
             type: DataTypes.STRING,
             allowNull:true
         }
+    }, {
+        timestamps: false
     });
     return Genre;
 };

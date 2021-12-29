@@ -8,6 +8,8 @@ function createRoleModel(connection) {
             type: DataTypes.STRING,
             allowNull: false
         }
+    },{
+        timestamps: false
     });
     return Role;
 };

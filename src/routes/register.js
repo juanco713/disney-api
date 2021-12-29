@@ -6,10 +6,10 @@ const {getModel} = require('../database/index');
 
 router.get('/users', async (req,res) => {
     const User = getModel('User');
+    const Role = getModel('Role');
     const data = await User.findAll({
-        include: userRoles
+        include: Role
     });
-    console.log(data)
     res.json(data);
 })
 router.post('/auth/login', userLogin);

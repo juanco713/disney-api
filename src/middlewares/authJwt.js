@@ -26,9 +26,12 @@ async function verifyToken(req, res, next) {
 
 async function authAdmin(req, res, next) {
     const User = getModel('User');
-    const admin = await User.findByPk(req.userId);
+    const role = await User.findOne({where: {
+        id :req.userId}
+    });
 
-    if (admin.admin === true) {
+
+    if (role.RoleId === 1) {
         next();
     } else {
         return res.status(401).json('Not allowed');

@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     res.json('Disney Api')
 });
 
-router.get('/characters', verifyToken,authAdmin, getCharacters);
+router.get('/characters', verifyToken, authAdmin ,getCharacters);
 
 router.get('/characters/:id', getOneCharacter);
 
