@@ -53,7 +53,7 @@ async function createCharacter(req, res) {
             res.json('You must have completed all the fields!')
         }
     } catch (error) {
-        console.error(error)
+        console.error(error).status(500);
     }
 };
 
@@ -88,7 +88,7 @@ async function deleteCharacter(req, res) {
         await data.destroy();
         res.send(`Character deleted`).status(200);
     } catch (error) {
-        console.error(error)
+        console.error(error).status(500)
     }
 };
 

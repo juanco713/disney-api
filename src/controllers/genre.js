@@ -28,7 +28,7 @@ async function createGenre(req, res) {
             res.json('You must have completed all the fields!')
         }
     } catch (error) {
-        console.error(error)
+        console.error(error).status(500)
     }
 };
 
@@ -62,7 +62,7 @@ async function deleteGenre(req, res) {
         await data.destroy();
         res.send(`Genre deleted`).status(200);
     } catch (error) {
-        console.error(error)
+        console.error(error).status(500)
     }
 };
 

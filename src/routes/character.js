@@ -13,15 +13,15 @@ router.get('/', (req, res) => {
     res.json('Disney Api')
 });
 
-router.get('/characters', verifyToken, authAdmin ,getCharacters);
+router.get('/characters', verifyToken,getCharacters);
 
-router.get('/characters/:id', getOneCharacter);
+router.get('/characters/:id', verifyToken,getOneCharacter);
 
-router.post('/character', createCharacter);
+router.post('/character', verifyToken, authAdmin, createCharacter);
 
-router.delete('/character/:id', deleteCharacter);
+router.delete('/character/:id',verifyToken, authAdmin, deleteCharacter);
 
-router.put('/character/:id', updateCharacter)
+router.put('/character/:id', verifyToken, authAdmin, updateCharacter)
 
 
 
