@@ -1,6 +1,7 @@
 const { getModel } = require('../database/index');
 const jwt = require('jsonwebtoken');
 const registerMail = require('@sendgrid/mail');
+const bcrypt = require('bcrypt');
 const emailKey = process.env.EMAIL_API_KEY;
 registerMail.setApiKey(emailKey);
 
@@ -9,11 +10,13 @@ async function userRegister(req, res) {
     try {
         const User = getModel('User');
         const { email, password } = req.body;
+        const hash = await bcrypt.hash(password, 10);
         if (email && password) {
             const newUser = await User.build({
-                email: req.body.email,
-                password: req.body.password
+                email: email,
+                password: hash
             });
+
             await newUser.save();
 
             const token = jwt.sign({ id: newUser.id }, process.env.SECRET_TOKEN, {
@@ -49,21 +52,22 @@ async function userLogin(req, res) {
         const { email, password } = req.body;
         const userFound = await User.findOne({
             where: {
-                email: email,
-                password: password
+                email: email
             }
         });
-
         if (userFound) {
-            const token = jwt.sign({ id: userFound.id }, process.env.SECRET_TOKEN);
-            res.json({ token }).status(200);
-        } else {
-            res.json('Email or password are wrong').status(404);
+            const validPass = await bcrypt.compare(password, userFound.password);
+            if (validPass) {
+                const token = jwt.sign({ id: userFound.id }, process.env.SECRET_TOKEN);
+                res.json({ token }).status(200);
+            } else {
+                res.json('Email or password are wrong').status(404);
+            }
         }
-    } catch (error) {
-        console.error(error).status(500);
-    }
-};
+        } catch (error) {
+            console.error(error).status(500);
+        }
+    };
 
-module.exports = { userRegister, userLogin };
+    module.exports = { userRegister, userLogin };
 

@@ -6,7 +6,8 @@ function createUserModel(connection) {
     const User = connection.define('User', {
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         password: {
             type: DataTypes.STRING,
